@@ -203,6 +203,10 @@ opts.Add(
         "optimize", "Optimization level", "speed_trace", ("none", "custom", "debug", "speed", "speed_trace", "size")
     )
 )
+
+
+opts.Add(BoolVariable("mobile_ui", "Enable experimental mobile UI", False))
+
 opts.Add(BoolVariable("debug_symbols", "Build with debugging symbols", False))
 opts.Add(BoolVariable("separate_debug_symbols", "Extract debugging symbols to a separate file", False))
 opts.Add(BoolVariable("debug_paths_relative", "Make file paths in debug symbols relative (if supported)", False))
@@ -1019,6 +1023,11 @@ if env["ninja"]:
 # Threads
 if env["threads"]:
     env.Append(CPPDEFINES=["THREADS_ENABLED"])
+
+
+# Mobile UI
+if env["mobile_ui"]:
+    env.Append(CPPDEFINES=["MOBILE_UI_ENABLED"])
 
 # Build subdirs, the build order is dependent on link order.
 Export("env")
