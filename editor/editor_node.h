@@ -440,8 +440,13 @@ private:
 	Tree *disk_changed_list = nullptr;
 	ConfirmationDialog *disk_changed = nullptr;
 
+#ifdef MOBILE_UI_ENABLED
+	bool scene_distraction_free = true;
+	bool script_distraction_free = true;
+#else
 	bool scene_distraction_free = false;
 	bool script_distraction_free = false;
+#endif
 
 	bool changing_scene = false;
 	bool cmdline_export_mode = false;
