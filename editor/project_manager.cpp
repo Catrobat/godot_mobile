@@ -155,8 +155,15 @@ void ProjectManager::_build_icon_type_cache(Ref<Theme> p_theme) {
 // Main layout.
 
 void ProjectManager::_update_size_limits() {
-	const Size2 minimum_size = Size2(680, 450) * EDSCALE;
+#ifdef MOBILE_UI_ENABLED
+	const Size2 minimum_size = Size2(480, 480) * EDSCALE;
+	const Size2 default_size = Size2(480, 720) * EDSCALE;
+
+#else
+	const Size2 minimum_size = Size2(1024, 600) * EDSCALE;
 	const Size2 default_size = Size2(1024, 600) * EDSCALE;
+
+#endif
 
 	// Define a minimum window size to prevent UI elements from overlapping or being cut off.
 	Window *w = Object::cast_to<Window>(SceneTree::get_singleton()->get_root());
