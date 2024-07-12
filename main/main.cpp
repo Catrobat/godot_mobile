@@ -211,7 +211,11 @@ static DisplayServer::WindowMode window_mode = DisplayServer::WINDOW_MODE_WINDOW
 static DisplayServer::ScreenOrientation window_orientation = DisplayServer::SCREEN_LANDSCAPE;
 static DisplayServer::VSyncMode window_vsync_mode = DisplayServer::VSYNC_ENABLED;
 static uint32_t window_flags = 0;
+#ifdef MOBILE_UI_ENABLED
+static Size2i window_size = Size2i(480, 720);
+#else
 static Size2i window_size = Size2i(1152, 648);
+#endif
 
 static int init_screen = DisplayServer::SCREEN_PRIMARY;
 static bool init_fullscreen = false;
