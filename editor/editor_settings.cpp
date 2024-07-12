@@ -522,7 +522,13 @@ void EditorSettings::_load_defaults(Ref<ConfigFile> p_extra_config) {
 	EDITOR_SETTING_USAGE(Variant::STRING, PROPERTY_HINT_GLOBAL_FILE, "interface/theme/custom_theme", "", "*.res,*.tres,*.theme", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_RESTART_IF_CHANGED)
 
 	// Touchscreen
-	bool has_touchscreen_ui = DisplayServer::get_singleton()->is_touchscreen_available();
+	#ifdef MOBILE_UI_ENABLED
+	   bool has_touchscreen_ui = true; // Simulate a Touchscreen
+	#else
+	   bool has_touchscreen_ui = DisplayServer::get_singleton()->is_touchscreen_available();
+	#endif
+
+
 	EDITOR_SETTING(Variant::BOOL, PROPERTY_HINT_NONE, "interface/touchscreen/increase_scrollbar_touch_area", has_touchscreen_ui, "")
 	EDITOR_SETTING(Variant::BOOL, PROPERTY_HINT_NONE, "interface/touchscreen/enable_long_press_as_right_click", has_touchscreen_ui, "")
 	set_restart_if_changed("interface/touchscreen/enable_long_press_as_right_click", true);
