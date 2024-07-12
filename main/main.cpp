@@ -1844,8 +1844,14 @@ Error Main::setup(const char *execpath, int argc, char *argv[], bool p_second_ph
 		packed_data->set_disabled(true);
 		main_args.push_back("--editor");
 		if (!init_windowed && !init_fullscreen) {
+#ifdef MOBILE_UI_ENABLED
+			init_maximized = false;
+			init_windowed = true;
+			window_mode = DisplayServer::WINDOW_MODE_WINDOWED;
+#else
 			init_maximized = true;
 			window_mode = DisplayServer::WINDOW_MODE_MAXIMIZED;
+#endif
 		}
 	}
 
