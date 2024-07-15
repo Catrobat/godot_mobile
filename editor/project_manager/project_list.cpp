@@ -293,7 +293,7 @@ ProjectListItemControl::ProjectListItemControl() {
 		project_path->set_clip_text(true);
 		project_path->set_h_size_flags(Control::SIZE_EXPAND_FILL);
 		project_path->set_modulate(Color(1, 1, 1, 0.5));
-		path_hb->add_child(project_path);
+		//path_hb->add_child(project_path);
 
 		project_unsupported_features = memnew(TextureRect);
 		project_unsupported_features->set_name("ProjectUnsupportedFeatures");
