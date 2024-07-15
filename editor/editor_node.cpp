@@ -6839,8 +6839,10 @@ EditorNode::EditorNode() {
 
 	file_menu = memnew(PopupMenu);
 	file_menu->set_name(TTR("Scene"));
+#ifndef MOBILE_UI_ENABLED
 	main_menu->add_child(file_menu);
 	main_menu->set_menu_tooltip(0, TTR("Operations with scene files."));
+#endif
 
 	accept = memnew(AcceptDialog);
 	accept->set_autowrap(true);
@@ -6964,7 +6966,9 @@ EditorNode::EditorNode() {
 
 	project_menu = memnew(PopupMenu);
 	project_menu->set_name(TTR("Project"));
+#ifndef MOBILE_UI_ENABLED
 	main_menu->add_child(project_menu);
+#endif
 
 	project_menu->add_shortcut(ED_SHORTCUT_AND_COMMAND("editor/project_settings", TTR("Project Settings..."), Key::NONE, TTR("Project Settings")), RUN_SETTINGS);
 	project_menu->connect(SceneStringName(id_pressed), callable_mp(this, &EditorNode::_menu_option));
@@ -6998,7 +7002,9 @@ EditorNode::EditorNode() {
 	HBoxContainer *left_spacer = memnew(HBoxContainer);
 	left_spacer->set_mouse_filter(Control::MOUSE_FILTER_PASS);
 	left_spacer->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+#ifndef MOBILE_UI_ENABLED
 	title_bar->add_child(left_spacer);
+#endif
 
 	if (can_expand && global_menu) {
 		project_title = memnew(Label);
@@ -7018,11 +7024,15 @@ EditorNode::EditorNode() {
 	// Options are added and handled by DebuggerEditorPlugin.
 	debug_menu = memnew(PopupMenu);
 	debug_menu->set_name(TTR("Debug"));
+#ifndef MOBILE_UI_ENABLED
 	main_menu->add_child(debug_menu);
+#endif
 
 	settings_menu = memnew(PopupMenu);
 	settings_menu->set_name(TTR("Editor"));
+#ifndef MOBILE_UI_ENABLED
 	main_menu->add_child(settings_menu);
+#endif
 
 #ifdef MACOS_ENABLED
 	if (!global_menu) {
@@ -7080,7 +7090,9 @@ EditorNode::EditorNode() {
 	if (global_menu && NativeMenu::get_singleton()->has_system_menu(NativeMenu::HELP_MENU_ID)) {
 		help_menu->set_system_menu(NativeMenu::HELP_MENU_ID);
 	}
+#ifndef MOBILE_UI_ENABLED
 	main_menu->add_child(help_menu);
+#endif
 
 	help_menu->connect(SceneStringName(id_pressed), callable_mp(this, &EditorNode::_menu_option));
 
@@ -7108,10 +7120,12 @@ EditorNode::EditorNode() {
 	Control *right_spacer = memnew(Control);
 	right_spacer->set_mouse_filter(Control::MOUSE_FILTER_PASS);
 	right_spacer->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+#ifndef MOBILE_UI_ENABLED
 	title_bar->add_child(right_spacer);
+#endif
 
 	project_run_bar = memnew(EditorRunBar);
-	title_bar->add_child(project_run_bar);
+	//title_bar->add_child(project_run_bar);
 	project_run_bar->connect("play_pressed", callable_mp(this, &EditorNode::_project_run_started));
 	project_run_bar->connect("stop_pressed", callable_mp(this, &EditorNode::_project_run_stopped));
 

@@ -5180,7 +5180,9 @@ CanvasItemEditor::CanvasItemEditor() {
 	// Main toolbars.
 	HBoxContainer *main_menu_hbox = memnew(HBoxContainer);
 	main_menu_hbox->set_anchors_and_offsets_preset(Control::PRESET_FULL_RECT);
+#ifndef MOBILE_UI_ENABLED
 	main_flow->add_child(main_menu_hbox);
+#endif
 
 	bottom_split = memnew(VSplitContainer);
 	add_child(bottom_split);
