@@ -1433,7 +1433,9 @@ ProjectManager::ProjectManager() {
 		HBoxContainer *footer_bar = memnew(HBoxContainer);
 		footer_bar->set_alignment(BoxContainer::ALIGNMENT_END);
 		footer_bar->add_theme_constant_override("separation", 20 * EDSCALE);
+#ifndef MOBILE_UI_ENABLED
 		main_vbox->add_child(footer_bar);
+#endif
 
 #ifdef ENGINE_UPDATE_CHECK_ENABLED
 		EngineUpdateLabel *update_label = memnew(EngineUpdateLabel);
