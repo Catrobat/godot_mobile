@@ -1193,7 +1193,9 @@ ProjectManager::ProjectManager() {
 		quick_settings_button = memnew(Button);
 		quick_settings_button->set_flat(true);
 		quick_settings_button->set_text(TTR("Settings"));
+#ifndef MOBILE_UI_ENABLED
 		right_hbox->add_child(quick_settings_button);
+#endif
 		quick_settings_button->connect(SceneStringName(pressed), callable_mp(this, &ProjectManager::_show_quick_settings));
 
 		if (can_expand) {
@@ -1344,48 +1346,65 @@ ProjectManager::ProjectManager() {
 
 			// The side bar with the edit, run, rename, etc. buttons.
 			VBoxContainer *project_list_sidebar = memnew(VBoxContainer);
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->set_custom_minimum_size(Size2(120, 120));
+#endif
 			project_list_hbox->add_child(project_list_sidebar);
-
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(memnew(HSeparator));
+#endif
 
 			open_btn = memnew(Button);
 			open_btn->set_text(TTR("Edit"));
 			open_btn->set_shortcut(ED_SHORTCUT("project_manager/edit_project", TTR("Edit Project"), KeyModifierMask::CMD_OR_CTRL | Key::E));
 			open_btn->connect(SceneStringName(pressed), callable_mp(this, &ProjectManager::_open_selected_projects_ask));
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(open_btn);
+#endif
 
 			run_btn = memnew(Button);
 			run_btn->set_text(TTR("Run"));
 			run_btn->set_shortcut(ED_SHORTCUT("project_manager/run_project", TTR("Run Project"), KeyModifierMask::CMD_OR_CTRL | Key::R));
 			run_btn->connect(SceneStringName(pressed), callable_mp(this, &ProjectManager::_run_project));
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(run_btn);
+#endif
 
 			rename_btn = memnew(Button);
 			rename_btn->set_text(TTR("Rename"));
 			// The F2 shortcut isn't overridden with Enter on macOS as Enter is already used to edit a project.
 			rename_btn->set_shortcut(ED_SHORTCUT("project_manager/rename_project", TTR("Rename Project"), Key::F2));
 			rename_btn->connect(SceneStringName(pressed), callable_mp(this, &ProjectManager::_rename_project));
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(rename_btn);
+#endif
 
 			manage_tags_btn = memnew(Button);
 			manage_tags_btn->set_text(TTR("Manage Tags"));
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(manage_tags_btn);
+#endif
 
 			erase_btn = memnew(Button);
 			erase_btn->set_text(TTR("Remove"));
 			erase_btn->set_shortcut(ED_SHORTCUT("project_manager/remove_project", TTR("Remove Project"), Key::KEY_DELETE));
 			erase_btn->connect(SceneStringName(pressed), callable_mp(this, &ProjectManager::_erase_project));
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(erase_btn);
+#endif
 
 			Control *filler = memnew(Control);
 			filler->set_v_size_flags(Control::SIZE_EXPAND_FILL);
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(filler);
+#endif
 
 			erase_missing_btn = memnew(Button);
 			erase_missing_btn->set_text(TTR("Remove Missing"));
 			erase_missing_btn->connect(SceneStringName(pressed), callable_mp(this, &ProjectManager::_erase_missing_projects));
+#ifndef MOBILE_UI_ENABLED
 			project_list_sidebar->add_child(erase_missing_btn);
+#endif
 		}
 	}
 
