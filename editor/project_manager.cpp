@@ -1252,18 +1252,24 @@ ProjectManager::ProjectManager() {
 			search_box->connect("text_changed", callable_mp(this, &ProjectManager::_on_search_term_changed));
 			search_box->connect("text_submitted", callable_mp(this, &ProjectManager::_on_search_term_submitted));
 			search_box->set_h_size_flags(Control::SIZE_EXPAND_FILL);
+#ifndef MOBILE_UI_ENABLED
 			hb->add_child(search_box);
+#endif
 
 			Label *sort_label = memnew(Label);
 			sort_label->set_text(TTR("Sort:"));
+#ifndef MOBILE_UI_ENABLED
 			hb->add_child(sort_label);
+#endif
 
 			filter_option = memnew(OptionButton);
 			filter_option->set_clip_text(true);
 			filter_option->set_h_size_flags(Control::SIZE_EXPAND_FILL);
 			filter_option->set_stretch_ratio(0.3);
 			filter_option->connect("item_selected", callable_mp(this, &ProjectManager::_on_order_option_changed));
+#ifndef MOBILE_UI_ENABLED
 			hb->add_child(filter_option);
+#endif
 
 			Vector<String> sort_filter_titles;
 			sort_filter_titles.push_back(TTR("Last Edited"));
