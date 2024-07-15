@@ -31,6 +31,7 @@
 #include "time.h"
 
 #include "core/os/os.h"
+#include <cstdint>
 
 #define UNIX_EPOCH_YEAR_AD 1970 // 1970
 #define SECONDS_PER_DAY (24 * 60 * 60) // 86400
@@ -233,12 +234,15 @@ Dictionary Time::get_time_dict_from_unix_time(int64_t p_unix_time_val) const {
 String Time::get_datetime_string_from_unix_time(int64_t p_unix_time_val, bool p_use_space) const {
 	UNIX_TIME_TO_HMS
 	UNIX_TIME_TO_YMD
+
+	second = (uint8_t)second; // Avoid compiler warning for not displaying excessive seconds;
+
 	// vformat only supports up to 6 arguments, so we need to split this up into 2 parts.
 	String timestamp = vformat("%04d-%02d-%02d", year, (uint8_t)month, day);
 	if (p_use_space) {
-		timestamp = vformat("%s %02d:%02d:%02d", timestamp, hour, minute, second);
+		timestamp = vformat("%s %02d:%02d", timestamp, hour, minute);
 	} else {
-		timestamp = vformat("%sT%02d:%02d:%02d", timestamp, hour, minute, second);
+		timestamp = vformat("%sT%02d:%02d", timestamp, hour, minute);
 	}
 
 	return timestamp;
